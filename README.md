@@ -4,7 +4,7 @@ UserName: swathi
 pwd : swathi2023
 
 UserName : john
-UserPwd : swathi2023
+UserPwd : john2023
 
 Change the path reference of the file before running:
 in ExerciseActivity.java
