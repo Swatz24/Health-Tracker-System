@@ -1,0 +1,12 @@
+swathi,bread,100,2023-06-12
+swathi,fish,200,2023-06-11
+john,cheese,150,2023-06-12
+john,fish,200,2023-06-11
+john,banana,50,2023-06-10
+swathi,rice,300,2023-06-09
+swathi,chicken,100,2023-06-08
+swathi,apple,50,2023-06-10
+john,rice,300,2023-06-09
+john,chicken,100,2023-06-08
+john,meat,300,2023-06-10
+swathi,Milk,100,2023-06-06

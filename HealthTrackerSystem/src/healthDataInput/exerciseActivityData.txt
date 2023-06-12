@@ -1,0 +1,5 @@
+john,swimming,100,100,2023-06-12
+john,walking,60,100,2023-06-11
+swathi,walking,60,100,2023-06-12
+swathi,cardio,45,100,2023-06-11
+john,walking,60,100,2023-05-11
