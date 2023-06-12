@@ -65,14 +65,16 @@ public class SleepRecord {
                     sleepRecordsMap.put(key, totalSleepHours);
                 }
             }
+        } catch (FileNotFoundException e) {
+            System.out.println("Sleep records file not found. Starting with an empty map.");
         } catch (IOException e) {
-            System.out.println("No existing sleep records found. Starting with an empty map.");
+            System.out.println("Error occurred while reading sleep records file. Starting with an empty map.");
         }
     }
 
     private void saveDataToFile(String data) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH, true))) {
-            writer.println(data);
+            writer.print(data+ "\n");
         } catch (IOException e) {
             System.out.println("Failed to save sleep record to file.");
         }
@@ -82,8 +84,16 @@ public class SleepRecord {
         int totalSleepHours = 0;
         int totalDays = 0;
 
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+        LocalDate start;
+        LocalDate end;
+
+        try {
+            start = LocalDate.parse(startDate);
+            end = LocalDate.parse(endDate);
+        } catch (Exception e) {
+            System.out.println("Invalid date format. Please use the format yyyy-MM-dd.");
+            return 0.0;
+        }
 
         for (LocalDate date = start; date.isBefore(end.plusDays(1)); date = date.plusDays(1)) {
             String key = username + "_" + date.toString();
@@ -93,14 +103,31 @@ public class SleepRecord {
             }
         }
 
-        return (double) totalSleepHours / totalDays;
+        if (totalDays > 0) {
+            return (double) totalSleepHours / totalDays;
+        } else {
+            System.out.println("No sleep records found in the specified date range.");
+            return 0.0;
+        }
     }
 
     public void identifyDaysWithLessSleepThanAverage(String startDate, String endDate) {
         double averageSleepHours = getAverageSleepHoursPerDay(startDate, endDate);
 
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+        if (averageSleepHours <= 0.0) {
+            return;
+        }
+
+        LocalDate start;
+        LocalDate end;
+
+        try {
+            start = LocalDate.parse(startDate);
+            end = LocalDate.parse(endDate);
+        } catch (Exception e) {
+            System.out.println("Invalid date format. Please use the format yyyy-MM-dd.");
+            return;
+        }
 
         for (LocalDate date = start; date.isBefore(end.plusDays(1)); date = date.plusDays(1)) {
             String key = username + "_" + date.toString();
@@ -116,8 +143,16 @@ public class SleepRecord {
     public int getTotalSleepHoursInRange(String startDate, String endDate) {
         int totalSleepHours = 0;
 
-        LocalDate start = LocalDate.parse(startDate);
-        LocalDate end = LocalDate.parse(endDate);
+        LocalDate start;
+        LocalDate end;
+
+        try {
+            start = LocalDate.parse(startDate);
+            end = LocalDate.parse(endDate);
+        } catch (Exception e) {
+            System.out.println("Invalid date format. Please use the format yyyy-MM-dd.");
+            return 0;
+        }
 
         for (LocalDate date = start; date.isBefore(end.plusDays(1)); date = date.plusDays(1)) {
             String key = username + "_" + date.toString();
@@ -128,5 +163,4 @@ public class SleepRecord {
 
         return totalSleepHours;
     }
-
 }
