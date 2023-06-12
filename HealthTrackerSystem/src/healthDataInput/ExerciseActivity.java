@@ -8,9 +8,10 @@ import java.util.*;
 
 public class ExerciseActivity {
     private Map<String, Integer> exerciseActivityMap;
-    private static final String FILE_PATH = "C:\\CTAC\\Health-Tracker-System\\HealthTrackerSystem\\src\\healthDataInput\\exerciseActivityData.txt";
-    private String username;
+        private static final String FILE_PATH = "C:\\CTAC\\Health-Tracker-System\\HealthTrackerSystem\\src\\healthDataInput\\exerciseActivityData.txt";
+        private String username;
 
+    private CalorieIntake calorieIntake;
     private CalorieIntake calorieIntake;
     private SleepRecord sleepRecord;
     public ExerciseActivity(String username) {
@@ -287,7 +288,7 @@ public class ExerciseActivity {
     }
     private void saveDataToFile(String data) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH, true))) {
-            writer.print(data);
+            writer.print(data + "\n");
         } catch (IOException e) {
             System.out.println("Failed to save exercise activity data to file.");
         }
