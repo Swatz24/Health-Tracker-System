@@ -56,7 +56,7 @@ public class CalorieIntake {
 
     private void saveDataToFile(String data) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH, true))) {
-            writer.print(data);
+            writer.print(data+ "\n");
         } catch (IOException e) {
             System.out.println("Failed to save calorie intake data to file.");
         }
